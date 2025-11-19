@@ -1,46 +1,25 @@
-
-# graph_logic.py — você edita APENAS este arquivo nesta atividade.
-# Dica: use apenas LISTAS para a fila/estrutura de dados (nada de deque).
-# Você pode fazer BFS com:
-#   fila = [a]; visitados = [a]
-#   while fila:
-#       u = fila.pop(0)          # remove o primeiro
-#       if u == b: return True
-#       for v in graph.get(u, []):
-#           if v not in visitados:
-#               visitados.append(v)
-#               fila.append(v)
-#   return False
-#
-# Alternativamente, pode usar DFS com uma lista como "pilha":
-#   pilha = [a]; visitados = []
-#   while pilha:
-#       u = pilha.pop()          # remove o último
-#       ...
-#   return False
-
+#avaliação
 def connected(graph, a, b):
     """
-    Retorna True se existe um caminho (qualquer) entre 'a' e 'b' no grafo não direcionado.
-    'graph' é um dicionário: { "Ana": ["Beto", ...], ... }
-    Implemente uma busca simples (BFS com listas ou DFS com listas).
-    Tratamento recomendado:
-      - Se 'a' ou 'b' não existirem como vértices, você pode retornar False OU levantar ValueError.
-      - Pode normalizar maiúsculas/minúsculas, desde que seja consistente.
+    Retorna True se existe um caminho entre 'a' e 'b' em um grafo não direcionado.
+    Implementação usando BFS com listas, conforme exigido.
     """
-    # TODO: implemente aqui usando APENAS listas.
-    # Exemplo (BFS com lista), em pseudocódigo:
-    # if a not in graph or b not in graph:
-    #     return False
-    # fila = [a]
-    # visitados = [a]
-    # while fila:
-    #     u = fila.pop(0)
-    #     if u == b:
-    #         return True
-    #     for v in graph.get(u, []):
-    #         if v not in visitados:
-    #             visitados.append(v)
-    #             fila.append(v)
-    # return False
-    raise NotImplementedError("Implemente a função connected usando apenas listas.")
+    # Verifica existência dos vértices
+    if a not in graph or b not in graph:
+        return False
+
+    fila = [a]          # fila de BFS
+    visitados = [a]     # lista de visitados
+
+    while fila:
+        u = fila.pop(0)     # remove o primeiro da fila
+
+        if u == b:
+            return True
+
+        for v in graph.get(u, []):
+            if v not in visitados:
+                visitados.append(v)
+                fila.append(v)
+
+    return False
